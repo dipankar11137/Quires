@@ -1,4 +1,3 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
@@ -7,9 +6,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import auth from "../../firebase.init";
-import login from "../../Images/Login/login.jpg";
 
 const CreateAccount = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -18,6 +15,7 @@ const CreateAccount = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+      const imageHostKey = 'c70a5fc10619997bd7315f2bf28d0f3e';
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -33,35 +31,48 @@ const CreateAccount = () => {
     navigate("/");
   }
 
-  const createDBUser = (name, email) => {
-    // fetch(`https://boxberry.onrender.com/create-user/${email}`, {
-    //   method: "PUT",
+  const createDBUser = (name, email,img) => {
+const image = img[0];
+ const formData = new FormData();
+ formData.append('image', image);
+ const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+ fetch(url, {
+   method: 'POST',
+   body: formData,
+ })
+   .then(res => res.json())
+   .then(imageData => {
+     const image = imageData.data.url;
+     const changeUrl = {name, email,  img: image };
+     console.log(changeUrl);
+    // fetch(`https:///create-user/${email}`, {
+    //   method: 'POST',
     //   headers: {
-    //     "content-type": "application/json",
+    //     'content-type': 'application/json',
     //   },
-    //   body: JSON.stringify({ name, email }),
+    //   body: JSON.stringify(changeUrl),
     // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     //  toast.success('Successfully Add A Product');
+    //     //  reset();
     //   });
+   });
+
   };
 
-  const onSubmit = (data) => {
-    // console.log(data.email, data.password, data.name);
-    createUserWithEmailAndPassword(data.email, data.password);
-    updateProfile({ displayName: data.name });
-    createDBUser(data.name, data.email);
-    toast.success("Updated profile");
+  const onSubmit =async (data) => {
+    console.log(data.email, data.password, data.name);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    await createDBUser(data.name, data.email,data.img);
+    // toast.success("Updated profile");
     navigate("/");
   };
   return (
-    <div className="flex justify-center h-screen bg-slate-700">
-      <div className="w-4/12 pt-40">
-        <img className="w-11/12 rounded-xl" src={login} alt="" />
-      </div>
+    <div className="flex justify-center h-screen bg-slate-900 pt-[60px]">
       <div className="flex h-screen justify-center items-center  ">
-        <div className="card w-96 shadow-xl bg-violet-50">
+        <div className="card w-96 shadow-xl bg-slate-600">
           <div className="card-body">
             <h2 className="text-center text-2xl font-bold">SignUp</h2>
 
@@ -73,16 +84,16 @@ const CreateAccount = () => {
                 <input
                   type="text"
                   placeholder="Your name"
-                  className="input input-bordered bg-white w-full max-w-xs"
-                  {...register("name", {
+                  className="input input-bordered bg-slate-900 w-full max-w-xs"
+                  {...register('name', {
                     required: {
                       value: true,
-                      message: "Name is Required",
+                      message: 'Name is Required',
                     },
                   })}
                 />
                 <label className="label">
-                  {errors.name?.type === "required" && (
+                  {errors.name?.type === 'required' && (
                     <span className="label-text-alt text-red-500">
                       {errors.name.message}
                     </span>
@@ -96,27 +107,50 @@ const CreateAccount = () => {
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="input input-bordered bg-white w-full max-w-xs"
-                  {...register("email", {
+                  className="input input-bordered bg-sla w-full max-w-xs"
+                  {...register('email', {
                     required: {
                       value: true,
-                      message: "Email is Required",
+                      message: 'Email is Required',
                     },
                     pattern: {
                       value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                      message: "Provide a valid Email",
+                      message: 'Provide a valid Email',
                     },
                   })}
                 />
                 <label className="label">
-                  {errors.email?.type === "required" && (
+                  {errors.email?.type === 'required' && (
                     <span className="label-text-alt text-red-500">
                       {errors.email.message}
                     </span>
                   )}
-                  {errors.email?.type === "pattern" && (
+                  {errors.email?.type === 'pattern' && (
                     <span className="label-text-alt text-red-500">
                       {errors.email.message}
+                    </span>
+                  )}
+                </label>
+              </div>
+              <div className="form-control w-full max-w-xs">
+                <label className="label">
+                  <span className="label-text">Image</span>
+                </label>
+                <input
+                  type="file"
+                  placeholder="Your Image"
+                  className="input input-bordered bg-slate-900 w-full max-w-xs pt-2"
+                  {...register('img', {
+                    required: {
+                      value: true,
+                      message: 'Image is Required',
+                    },
+                  })}
+                />
+                <label className="label">
+                  {errors.img?.type === 'required' && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.img.message}
                     </span>
                   )}
                 </label>
@@ -128,25 +162,25 @@ const CreateAccount = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="input input-bordered bg-white w-full max-w-xs"
-                  {...register("password", {
+                  className="input input-bordered bg-slate-900 w-full max-w-xs"
+                  {...register('password', {
                     required: {
                       value: true,
-                      message: "Password is Required",
+                      message: 'Password is Required',
                     },
                     minLength: {
                       value: 6,
-                      message: "Must be 6 characters or longer",
+                      message: 'Must be 6 characters or longer',
                     },
                   })}
                 />
                 <label className="label">
-                  {errors.password?.type === "required" && (
+                  {errors.password?.type === 'required' && (
                     <span className="label-text-alt text-red-500">
                       {errors.password.message}
                     </span>
                   )}
-                  {errors.password?.type === "minLength" && (
+                  {errors.password?.type === 'minLength' && (
                     <span className="label-text-alt text-red-500">
                       {errors.password.message}
                     </span>
@@ -155,26 +189,26 @@ const CreateAccount = () => {
               </div>
               {signInError}
               <input
-                className="btn w-full text-white"
+                className="btn btn-primary w-full text-white"
                 type="submit"
                 value="Sign Up"
               />
             </form>
             <p>
               <small>
-                Already Have an Account ?{" "}
+                Already Have an Account ?{' '}
                 <Link to="/login" className="text-orange-600 font-bold">
                   Please Login
                 </Link>
               </small>
             </p>
-            <div className="divider">OR</div>
+            {/* <div className="divider">OR</div>
             <button
               onClick={() => signInWithGoogle()}
               className="btn btn-outline font-black bg-orange-600 text-white"
             >
               Continue With Google
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
