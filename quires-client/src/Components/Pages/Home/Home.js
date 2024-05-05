@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import AddPost from './AddPost/AddPost';
 import HomeSections from './Home Section/HomeSections';
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
           </div>
         </div>
         <div className="col-span-6">
+          <AddPost/>
           <HomeSections />
         </div>
         <div className="col-span-3 border-l-[1px] border-slate-500">
