@@ -73,9 +73,9 @@ const HomeSection = () => {
                   />
                   <div className="flex items-center">
                     <h1 className="ml-3 font-semibold text-sm">Abbus Ali </h1>
-                    {/* <h2 className="ml-5 text-xs text-slate-400 flex items-center">
-                  <LuDot />4 Hour ago
-                </h2> */}
+                    <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
+                      <GoDotFill />4 Hour ago
+                    </h2>
                   </div>
                 </div>
 
