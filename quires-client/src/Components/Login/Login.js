@@ -7,9 +7,8 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 // import axios from "axios";
-import Loading from "../Share/Loading";
-import login from "../../Images/Login/login.jpg";
 import { toast } from "react-toastify";
+import Loading from "../Share/Loading";
 
 const Login = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -56,12 +55,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center h-screen bg-slate-700">
-      <div className="w-4/12 pt-40">
+    <div className="flex justify-center h-screen bg-slate-900">
+      {/* <div className="w-4/12 pt-40">
         <img className="w-11/12 rounded-xl" src={login} alt="" />
-      </div>
+      </div> */}
       <div className="flex justify-center items-center ">
-        <div className="card w-96 shadow-2xl bg-violet-50">
+        <div className="card w-96 shadow-2xl bg-slate-600">
           <div className="card-body">
             <h2 className="text-center text-2xl">Login</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -72,7 +71,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="input input-bordered bg-white w-full max-w-xs"
+                  className="input input-bordered bg-slate-900 w-full max-w-xs"
                   {...register("email", {
                     required: {
                       value: true,
@@ -104,7 +103,7 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="input input-bordered bg-white w-full max-w-xs"
+                  className="input input-bordered bg-slate-900 w-full max-w-xs"
                   {...register("password", {
                     required: {
                       value: true,
@@ -132,26 +131,26 @@ const Login = () => {
 
               {signInError}
               <input
-                className="btn btn-orange-500 w-full text-white"
+                className="btn btn-primary w-full text-white"
                 type="submit"
                 value="Login"
               />
             </form>
             <p>
               <small>
-                New to BoxBerry Motor?{" "}
-                <Link to="/createAccount" className="text-orange-600 font-bold">
+                New to ?{" "}
+                <Link to="/createAccount" className="text-indigo-200 font-bold">
                   Create New Account
                 </Link>
               </small>
             </p>
-            <div className="divider">OR</div>
+            {/* <div className="divider">OR</div>
             <button
               onClick={() => signInWithGoogle()}
               className="btn btn-outline font-black"
             >
               Continue With Google
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
