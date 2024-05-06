@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowAltCircleLeft, FaCommentAlt, FaShare } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
-import Comment from './Comment';
+import Comments from './Comments/Comments';
 import './Scroll.css';
 
 const HomeSection = ({ quire }) => {
@@ -85,7 +85,7 @@ const HomeSection = ({ quire }) => {
 
         {comment && <div className="w-72 h-[1px] bg-slate-700 mt-1"></div>}
         {/* comment */}
-        {comment && <Comment />}
+        {comment && <Comments quire={quire} />}
       </div>
     </div>
   );

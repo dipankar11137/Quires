@@ -48,7 +48,7 @@ const PostCart = ({user}) => {
         pTime: formattedTime,
       };
 
-      console.log('aci',updateUrl);
+      // console.log('aci',updateUrl);
       fetch(`http://localhost:5000/quires`, {
         method: 'POST',
         headers: {
