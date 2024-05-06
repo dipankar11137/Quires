@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import Comment from './Comment';
 
-const Comments = ({ quire }) => {
+const Comments = ({ quire, comments }) => {
   const [comment, setComment] = useState('');
 
   const currentDate = new Date();
@@ -18,12 +18,13 @@ const Comments = ({ quire }) => {
   const formattedTime = `${year}-${month}-${date}T${hours}:${minutes}:${seconds}`;
 
   const handlePost = () => {
-
     const updateComment = {
       pId: quire?._id,
       name: quire?.name,
       img: quire?.img,
+      email: quire?.email,
       time: formattedTime,
+      comment,
     };
     fetch(`http://localhost:5000/comments`, {
       method: 'POST',
@@ -34,21 +35,24 @@ const Comments = ({ quire }) => {
     })
       .then(res => res.json())
       .then(data => {
-        setComment('')
-         
+        setComment('');
       });
-  
   };
   return (
     <div className="pb-1 mt-3 ml-3">
       {/* show comment */}
       <div className="p-3 h-44 overflow-y-scroll custom-scrollbar">
-        <Comment />
-        <Comment />
+        {comments
+          .slice()
+          .reverse()
+          .map(comment => (
+            <Comment key={comment?._id} comment={comment} />
+          ))}
       </div>
       {/* add comment */}
       <div className="  flex mt-3">
         <textarea
+          value={comment}
           onChange={e => setComment(e.target.value)}
           placeholder="Write your answer"
           className="w-full pl-2 pt-1 bg-slate-800 rounded-l-lg"

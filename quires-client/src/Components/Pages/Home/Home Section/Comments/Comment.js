@@ -1,8 +1,8 @@
 import React from 'react';
 import { GoDotFill } from 'react-icons/go';
 
-const Comment = () => {
-
+const Comment = ({comment}) => {
+console.log(comment)
   return (
     <div className="mb-4">
       <div className="flex items-end ">
@@ -12,21 +12,16 @@ const Comment = () => {
           alt=""
         />
         <div className="flex items-center">
-          <h1 className="ml-3 font-semibold text-sm">Abbus Ali </h1>
+          <h1 className="ml-3 font-semibold text-md text-indigo-400">Abbus Ali </h1>
           <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
             <GoDotFill />4 Hour ago 
           </h2>
         </div>
       </div>
 
-      <div className="mt-2 font-normal  text-[13px]">
-        <h1>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-          distinctio nam provident consequatur tenetur quia eveniet iusto modi
-          illo saepe itaque, consectetur incidunt eos similique molestiae
-          praesentium. Fuga qui ratione autem rerum eligendi libero,
-          exercitationem explicabo itaque laborum repellat doloribus optio
-          reiciendis error! Quod possimus libero delectus corporis enim dicta?
+      <div className="mt-1 font-normal  text-[13px]">
+        <h1 className='ml-10'>
+        {comment?.comment}
         </h1>
       </div>
     </div>

@@ -6,7 +6,14 @@ import './Scroll.css';
 
 const HomeSection = ({ quire }) => {
   const [comment, setComment] = useState(false);
- const [time, setTime] = useState(0);
+  const [time, setTime] = useState(0);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/comment/${quire?._id}`)
+      .then(res => res.json())
+      .then(data => setComments(data));
+  }, [comments, quire?._id]);
 
  useEffect(() => {
    const currentTime = new Date();
@@ -54,7 +61,7 @@ const HomeSection = ({ quire }) => {
             )}
             <img className="h-10 w-10 rounded-full" src={quire?.img} alt="" />
             <div className="flex items-center">
-              <h1 className="ml-3 font-semibold ">{quire?.name} </h1>
+              <h1 className="ml-3 font-semibold text-indigo-300">{quire?.name} </h1>
               <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
                 <GoDotFill className="text-green-600" />
                 {time} ago
@@ -75,7 +82,7 @@ const HomeSection = ({ quire }) => {
               onClick={() => setComment(prevComment => !prevComment)}
               className="ml-2 bg-slate-800 hover:bg-slate-900 px-3 py-1 rounded-full flex items-center gap-2"
             >
-              <FaCommentAlt /> 521
+              <FaCommentAlt /> {comments.length}
             </button>
             <button className="ml-2 bg-slate-800 hover:bg-slate-900 px-3 py-1 rounded-full flex items-center gap-2">
               <FaShare /> Share
@@ -85,7 +92,7 @@ const HomeSection = ({ quire }) => {
 
         {comment && <div className="w-72 h-[1px] bg-slate-700 mt-1"></div>}
         {/* comment */}
-        {comment && <Comments quire={quire} />}
+        {comment && <Comments quire={quire} comments={comments} />}
       </div>
     </div>
   );
