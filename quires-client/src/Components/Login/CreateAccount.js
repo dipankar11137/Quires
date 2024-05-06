@@ -1,9 +1,11 @@
 import React from "react";
 import {
   useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
   useSignInWithGoogle,
   useUpdateProfile,
-} from "react-firebase-hooks/auth";
+} from 'react-firebase-hooks/auth';
+
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -14,11 +16,14 @@ const CreateAccount = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
       const imageHostKey = 'c70a5fc10619997bd7315f2bf28d0f3e';
 
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword] =
+      useSignInWithEmailAndPassword(auth);
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
@@ -43,20 +48,22 @@ const image = img[0];
    .then(res => res.json())
    .then(imageData => {
      const image = imageData.data.url;
-     const changeUrl = {name, email,  img: image };
+     const changeUrl = { name, email, img: image };
+     
      console.log(changeUrl);
-    // fetch(`https:///create-user/${email}`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    //   body: JSON.stringify(changeUrl),
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     //  toast.success('Successfully Add A Product');
-    //     //  reset();
-    //   });
+     fetch(`http://localhost:5000/create-user/${email}`, {
+       method: 'PUT',
+       headers: {
+         'content-type': 'application/json',
+       },
+       body: JSON.stringify(changeUrl),
+     })
+       .then(res => res.json())
+       .then(data => {
+        
+          reset();
+         navigate('/');
+       });
    });
 
   };
@@ -64,10 +71,11 @@ const image = img[0];
   const onSubmit =async (data) => {
     console.log(data.email, data.password, data.name);
     await createUserWithEmailAndPassword(data.email, data.password);
+    await signInWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    await createDBUser(data.name, data.email,data.img);
+     createDBUser(data.name, data.email,data.img);
     // toast.success("Updated profile");
-    navigate("/");
+    // navigate("/");
   };
   return (
     <div className="flex justify-center h-screen bg-slate-900 pt-[60px]">
