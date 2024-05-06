@@ -50,7 +50,7 @@ const image = img[0];
      const image = imageData.data.url;
      const changeUrl = { name, email, img: image };
      
-     console.log(changeUrl);
+    //  console.log(changeUrl);
      fetch(`http://localhost:5000/create-user/${email}`, {
        method: 'PUT',
        headers: {

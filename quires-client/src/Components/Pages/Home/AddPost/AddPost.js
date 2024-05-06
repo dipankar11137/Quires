@@ -1,7 +1,11 @@
 import React from 'react';
+import useUser from '../../../hooks/useUser';
 import PostCart from './PostCart';
 
 const AddPost = () => {
+  const {user} = useUser()
+  // console.log(user)
+
   return (
     <div>
       <label htmlFor="my_modal_6" className="">
@@ -9,15 +13,15 @@ const AddPost = () => {
           <div className="flex items-center gap-3">
             <img
               className="h-12 w-12 rounded-full"
-              src="https://i.pinimg.com/236x/ed/05/5f/ed055f0364e7fd93364d1bbe48d3631b.jpg"
+              src={user?.img}
               alt=""
             />
             <h1 className="w-full bg-slate-600 rounded-xl pl-2 py-1 text-slate-300">
-              What's on your mind , Dipu ?
+              What's on your mind , {user?.name} ?
             </h1>
             
           </div>
-          <div className="mt-3 pb-1 flex justify-between mx-14">
+          <div className="mt-3 pb-1 flex justify-between mx-20">
             <div className="flex items-end gap-1">
               <img
                 className="h-6 w-8"
@@ -49,7 +53,7 @@ const AddPost = () => {
       {/* Put this part before </body> tag */}
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal" role="dialog">
-        <PostCart />
+        <PostCart user={user} />
       </div>
     </div>
   );

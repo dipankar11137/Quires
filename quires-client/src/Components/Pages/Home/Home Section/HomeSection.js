@@ -1,11 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowAltCircleLeft, FaCommentAlt, FaShare } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
-import { IoMdSend } from 'react-icons/io';
+import Comment from './Comment';
 import './Scroll.css';
 
-const HomeSection = () => {
-  const [comment,setComment]=useState(false)
+const HomeSection = ({ quire }) => {
+  const [comment, setComment] = useState(false);
+ const [time, setTime] = useState(0);
+
+ useEffect(() => {
+   const currentTime = new Date();
+   const previousTime = new Date(quire?.pTime); // Example previous time
+
+   // Calculate the difference in milliseconds
+   const differenceMs = Math.abs(currentTime - previousTime);
+
+   // Convert difference to minutes, hours, and days
+   let differenceMinutes = Math.floor(differenceMs / (1000 * 60));
+   let differenceHours = Math.floor(differenceMinutes / 60);
+   let differenceDays = Math.floor(differenceHours / 24);
+   let differenceMonth = Math.floor(differenceDays / 30);
+
+   // Handle crossing 60 minutes to hours
+   differenceMinutes %= 60;
+
+   // Set the time based on the largest non-zero unit
+    if (differenceMonth > 0) {
+      setTime(`${differenceMonth} month`);
+    } else if (differenceDays > 0) {
+      setTime(`${differenceDays} days`);
+    } else if (differenceHours > 0) {
+      setTime(`${differenceHours} hours`);
+    } else {
+      setTime(`${differenceMinutes} minutes`);
+    }
+ }, [quire]);
+
+
+ 
   return (
     <div className="border-b-[1px] border-slate-600 pb-2 mb-3">
       {' '}
@@ -20,29 +52,22 @@ const HomeSection = () => {
                 <FaArrowAltCircleLeft />
               </button>
             )}
-            <img
-              className="h-10 w-10 rounded-full"
-              src="https://static.vecteezy.com/system/resources/thumbnails/023/133/583/small/man-with-glasses-and-headphones-logo-vector.jpg"
-              alt=""
-            />
+            <img className="h-10 w-10 rounded-full" src={quire?.img} alt="" />
             <div className="flex items-center">
-              <h1 className="ml-3 font-semibold ">Abbus Ali </h1>
+              <h1 className="ml-3 font-semibold ">{quire?.name} </h1>
               <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
-                <GoDotFill />4 Hour ago
+                <GoDotFill className="text-green-600" />
+                {time} ago
               </h2>
             </div>
           </div>
 
           <div className="mt-3 font-normal  text-lg">
-            <h1>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-              distinctio nam provident consequatur tenetur quia eveniet iusto
-              modi illo saepe itaque, consectetur incidunt eos similique
-              molestiae praesentium. Fuga qui ratione autem rerum eligendi
-              libero, exercitationem explicabo itaque laborum repellat doloribus
-              optio reiciendis error! Quod possimus libero delectus corporis
-              enim dicta?
-            </h1>
+            {quire?.image && (
+              <img className="w-full h-[300px]" src={quire?.image} alt="" />
+            )}
+
+            <h1>{quire?.description}</h1>
           </div>
 
           <div className="mt-4 pb-2 flex items-center ">
@@ -60,81 +85,7 @@ const HomeSection = () => {
 
         {comment && <div className="w-72 h-[1px] bg-slate-700 mt-1"></div>}
         {/* comment */}
-        {comment && (
-          <div className="pb-1 mt-3 ml-3">
-            {/* show comment */}
-            <div className="p-3 h-44 overflow-y-scroll custom-scrollbar">
-              <div className="mb-4">
-                <div className="flex items-end ">
-                  <img
-                    className="h-6 w-6 rounded-full"
-                    src="https://static.vecteezy.com/system/resources/thumbnails/023/133/583/small/man-with-glasses-and-headphones-logo-vector.jpg"
-                    alt=""
-                  />
-                  <div className="flex items-center">
-                    <h1 className="ml-3 font-semibold text-sm">Abbus Ali </h1>
-                    <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
-                      <GoDotFill />4 Hour ago
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="mt-2 font-normal  text-[13px]">
-                  <h1>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Culpa distinctio nam provident consequatur tenetur quia
-                    eveniet iusto modi illo saepe itaque, consectetur incidunt
-                    eos similique molestiae praesentium. Fuga qui ratione autem
-                    rerum eligendi libero, exercitationem explicabo itaque
-                    laborum repellat doloribus optio reiciendis error! Quod
-                    possimus libero delectus corporis enim dicta?
-                  </h1>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-end ">
-                  <img
-                    className="h-6 w-6 rounded-full"
-                    src="https://static.vecteezy.com/system/resources/thumbnails/023/133/583/small/man-with-glasses-and-headphones-logo-vector.jpg"
-                    alt=""
-                  />
-                  <div className="flex items-center">
-                    <h1 className="ml-3 font-semibold text-sm">Abbus Ali </h1>
-                    {/* <h2 className="ml-5 text-xs text-slate-400 flex items-center">
-                  <LuDot />4 Hour ago
-                </h2> */}
-                  </div>
-                </div>
-
-                <div className="mt-2 font-normal  text-[13px]">
-                  <h1>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Culpa distinctio nam provident consequatur tenetur quia
-                    eveniet iusto modi illo saepe itaque, consectetur incidunt
-                    eos similique molestiae praesentium. Fuga qui ratione autem
-                    rerum eligendi libero, exercitationem explicabo itaque
-                    laborum repellat doloribus optio reiciendis error! Quod
-                    possimus libero delectus corporis enim dicta?
-                  </h1>
-                </div>
-              </div>
-            </div>
-            {/* add comment */}
-            <div className="  flex mt-3">
-              <textarea
-                placeholder="Write your answer"
-                className="w-full pl-2 pt-1 bg-slate-800 rounded-l-lg"
-                type="text"
-                name=""
-                id=""
-              />
-
-              <button className="bg-slate-800">
-                <IoMdSend className="w-14 text-2xl" />
-              </button>
-            </div>
-          </div>
-        )}
+        {comment && <Comment />}
       </div>
     </div>
   );

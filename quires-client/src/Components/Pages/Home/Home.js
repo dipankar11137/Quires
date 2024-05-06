@@ -18,6 +18,7 @@ const Home = () => {
         <div className="col-span-3 border-r-[1px] border-slate-500 ">
           <div className="fixed mt-5 ml-5">
             <h1>Dado</h1>
+         
           </div>
         </div>
         <div className="col-span-6">
