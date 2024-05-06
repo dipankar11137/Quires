@@ -29,9 +29,9 @@ async function run() {
     await client.connect();
 
     const userCollection = client.db('queries').collection('user');
-    const quiresCollection = client.db('quires').collection('quires');
+    const quiresCollection = client.db('queries').collection('quires');
 
-    const bookingCollection = client.db('hospital').collection('bookings');
+    const commentCollection = client.db('queries').collection('comments');
     const contactCollection = client.db('hospital').collection('contacts');
 
     // // // // // // // // // // // //
@@ -86,6 +86,21 @@ async function run() {
     app.get('/quires', async (req, res) => {
       const query = {};
       const cursor = quiresCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
+    // // //  *********  post comment  ********//
+
+    // Post appointments
+    app.post('/comments', async (req, res) => {
+      const appointmentsBook = req.body;
+      const result = await commentCollection.insertOne(appointmentsBook);
+      res.send(result);
+    });
+    // get comments
+    app.get('/comments', async (req, res) => {
+      const query = {};
+      const cursor = commentCollection.find(query);
       const users = await cursor.toArray();
       res.send(users);
     });
