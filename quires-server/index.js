@@ -89,6 +89,7 @@ async function run() {
       const users = await cursor.toArray();
       res.send(users);
     });
+
     // // //  *********  post comment  ********//
 
     // Post appointments
@@ -103,6 +104,14 @@ async function run() {
       const cursor = commentCollection.find(query);
       const users = await cursor.toArray();
       res.send(users);
+    });
+    //  comment  filter by post
+    app.get('/comment/:pId', async (req, res) => {
+      const pId = req.params.pId;
+      const query = { pId };
+      const cursor = commentCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
     });
 
     // // get doctor by id
