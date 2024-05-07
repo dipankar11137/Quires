@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { FaArrowAltCircleLeft, FaCommentAlt, FaShare } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
 import { toast } from 'react-toastify';
+import auth from '../../../../firebase.init';
 import Comments from './Comments/Comments';
 import './Scroll.css';
 
-const HomeSection = ({ quire, handleRemove,setMId }) => {
+const HomeSection = ({ quire, handleRemove, setMId }) => {
+   const [users] = useAuthState(auth);
   const [comment, setComment] = useState(false);
   const [remove, setRemove] = useState(false);
   const [time, setTime] = useState(0);
   const [comments, setComments] = useState([]);
   const [rId,setRId]=useState('')
 
+  console.log(users)
   useEffect(() => {
     fetch(`http://localhost:5000/comment/${quire?._id}`)
       .then(res => res.json())
@@ -93,6 +97,8 @@ const HomeSection = ({ quire, handleRemove,setMId }) => {
                 </div>
               </div>
               {/* remove modal */}
+              {users?.email === quire?.email && <h1>dado</h1>}
+
               <div>
                 <label
                   onClick={() => setMId(quire._id)}

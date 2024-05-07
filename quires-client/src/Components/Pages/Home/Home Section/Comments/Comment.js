@@ -3,7 +3,7 @@ import { GoDotFill } from 'react-icons/go';
 
 const Comment = ({ comment, setRId, handleCommentRemove }) => {
   const [time, setTime] = useState(0);
-  console.log(comment);
+  // console.log(comment);
   useEffect(() => {
     const currentTime = new Date();
     const previousTime = new Date(comment?.time); // Example previous time

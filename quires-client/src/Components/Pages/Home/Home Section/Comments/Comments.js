@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
+import useUser from '../../../../hooks/useUser';
 import Comment from './Comment';
 
 const Comments = ({ quire, comments, setRId, handleCommentRemove }) => {
   const [comment, setComment] = useState('');
+  const {user}=useUser()
 
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -20,9 +22,9 @@ const Comments = ({ quire, comments, setRId, handleCommentRemove }) => {
   const handlePost = () => {
     const updateComment = {
       pId: quire?._id,
-      name: quire?.name,
-      img: quire?.img,
-      email: quire?.email,
+      name: user?.name,
+      img: user?.img,
+      email: user?.email,
       time: formattedTime,
       comment,
     };
