@@ -97,44 +97,44 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
                 </div>
               </div>
               {/* remove modal */}
-              {users?.email === quire?.email && <h1>dado</h1>}
+              {users?.email === quire?.email && (
+                <div>
+                  <label
+                    onClick={() => setMId(quire._id)}
+                    htmlFor="remove-modal"
+                    className="text-xl hover:cursor-pointer"
+                  >
+                    ...
+                  </label>
 
-              <div>
-                <label
-                  onClick={() => setMId(quire._id)}
-                  htmlFor="remove-modal"
-                  className="text-xl hover:cursor-pointer"
-                >
-                  ...
-                </label>
+                  {/* Put this part before </body> tag */}
+                  <input
+                    type="checkbox"
+                    id="remove-modal"
+                    className="modal-toggle"
+                  />
+                  <div className="modal" role="dialog">
+                    {/* <div className="modal-box"> */}
+                    <div className="bg-slate-800 p-5 rounded-xl w-28">
+                      <div className="flex justify-end -mt-5 -mr-5 ">
+                        <label
+                          htmlFor="remove-modal"
+                          className="bg-slate-600 px-2 rounded-full cursor-pointer"
+                        >
+                          x
+                        </label>
+                      </div>
 
-                {/* Put this part before </body> tag */}
-                <input
-                  type="checkbox"
-                  id="remove-modal"
-                  className="modal-toggle"
-                />
-                <div className="modal" role="dialog">
-                  {/* <div className="modal-box"> */}
-                  <div className="bg-slate-800 p-5 rounded-xl w-28">
-                    <div className="flex justify-end -mt-5 -mr-5 ">
-                      <label
-                        htmlFor="remove-modal"
-                        className="bg-slate-600 px-2 rounded-full cursor-pointer"
+                      <button
+                        onClick={handleRemove}
+                        className="btn btn-xs btn-secondary"
                       >
-                        x
-                      </label>
+                        Remove
+                      </button>
                     </div>
-
-                    <button
-                      onClick={handleRemove}
-                      className="btn btn-xs btn-secondary"
-                    >
-                      Remove
-                    </button>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
