@@ -41,14 +41,24 @@ const Comments = ({ quire, comments }) => {
   return (
     <div className="pb-1 mt-3 ml-3">
       {/* show comment */}
-      <div className="p-3 h-44 overflow-y-scroll custom-scrollbar">
-        {comments
-          .slice()
-          .reverse()
-          .map(comment => (
-            <Comment key={comment?._id} comment={comment} />
-          ))}
-      </div>
+      <div>       
+        {comments.length === 0 ? (
+           <div className="p-3 h-16 overflow-y-scroll custom-scrollbar">
+            <h1>No Comments Here</h1>  </div>
+          ) : (
+            <div className="p-3 h-40 overflow-y-scroll custom-scrollbar">
+              {' '}
+              {comments
+                .slice()
+                .reverse()
+                .map(comment => (
+                  <Comment key={comment?._id} comment={comment} />
+                ))}
+             </div>
+          )}
+        </div>
+     
+
       {/* add comment */}
       <div className="  flex mt-3">
         <textarea
