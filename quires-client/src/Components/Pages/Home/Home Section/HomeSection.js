@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowAltCircleLeft, FaCommentAlt, FaShare } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
+import { toast } from 'react-toastify';
 import Comments from './Comments/Comments';
 import './Scroll.css';
 
@@ -9,12 +10,29 @@ const HomeSection = ({ quire, handleRemove,setMId }) => {
   const [remove, setRemove] = useState(false);
   const [time, setTime] = useState(0);
   const [comments, setComments] = useState([]);
+  const [rId,setRId]=useState('')
 
   useEffect(() => {
     fetch(`http://localhost:5000/comment/${quire?._id}`)
       .then(res => res.json())
       .then(data => setComments(data));
   }, [comments, quire?._id]);
+
+  const handleCommentRemove = () => {
+     const proceed = window.confirm('Are You Sure ?');
+     if (proceed) {
+       const url = `http://localhost:5000/commentRemove/${rId}`;
+       fetch(url, {
+         method: 'DELETE',
+       })
+         .then(res => res.json())
+         .then(data => {
+           const remaining = comments.filter(product => product._id !== rId);
+           setComment(remaining);
+           toast.success('Remove Successfully ');
+         });
+     }
+  }
 
   useEffect(() => {
     const currentTime = new Date();
@@ -103,7 +121,7 @@ const HomeSection = ({ quire, handleRemove,setMId }) => {
                     </div>
 
                     <button
-                      onClick={ handleRemove}
+                      onClick={handleRemove}
                       className="btn btn-xs btn-secondary"
                     >
                       Remove
@@ -137,7 +155,14 @@ const HomeSection = ({ quire, handleRemove,setMId }) => {
 
         {comment && <div className="w-72 h-[1px] bg-slate-700 mt-1"></div>}
         {/* comment */}
-        {comment && <Comments quire={quire} comments={comments} />}
+        {comment && (
+          <Comments
+            quire={quire}
+            comments={comments}
+            setRId={setRId}
+            handleCommentRemove={handleCommentRemove}
+          />
+        )}
       </div>
     </div>
   );

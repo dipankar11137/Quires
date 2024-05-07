@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import Comment from './Comment';
 
-const Comments = ({ quire, comments }) => {
+const Comments = ({ quire, comments, setRId, handleCommentRemove }) => {
   const [comment, setComment] = useState('');
 
   const currentDate = new Date();
@@ -41,23 +41,28 @@ const Comments = ({ quire, comments }) => {
   return (
     <div className="pb-1 mt-3 ml-3">
       {/* show comment */}
-      <div>       
+      <div>
         {comments.length === 0 ? (
-           <div className="p-3 h-16 overflow-y-scroll custom-scrollbar">
-            <h1>No Comments Here</h1>  </div>
-          ) : (
-            <div className="p-3 h-40 overflow-y-scroll custom-scrollbar">
-              {' '}
-              {comments
-                .slice()
-                .reverse()
-                .map(comment => (
-                  <Comment key={comment?._id} comment={comment} />
-                ))}
-             </div>
-          )}
-        </div>
-     
+          <div className="p-3 h-16 overflow-y-scroll custom-scrollbar">
+            <h1>No Comments Here</h1>{' '}
+          </div>
+        ) : (
+          <div className="p-3 h-40 overflow-y-scroll custom-scrollbar">
+            {' '}
+            {comments
+              .slice()
+              .reverse()
+              .map(comment => (
+                <Comment
+                  key={comment?._id}
+                  comment={comment}
+                  setRId={setRId}
+                  handleCommentRemove={handleCommentRemove}
+                />
+              ))}
+          </div>
+        )}
+      </div>
 
       {/* add comment */}
       <div className="  flex mt-3">
