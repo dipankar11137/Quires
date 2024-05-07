@@ -4,8 +4,9 @@ import { GoDotFill } from 'react-icons/go';
 import Comments from './Comments/Comments';
 import './Scroll.css';
 
-const HomeSection = ({ quire }) => {
+const HomeSection = ({ quire, handleRemove,setMId }) => {
   const [comment, setComment] = useState(false);
+  const [remove, setRemove] = useState(false);
   const [time, setTime] = useState(0);
   const [comments, setComments] = useState([]);
 
@@ -15,23 +16,23 @@ const HomeSection = ({ quire }) => {
       .then(data => setComments(data));
   }, [comments, quire?._id]);
 
- useEffect(() => {
-   const currentTime = new Date();
-   const previousTime = new Date(quire?.pTime); // Example previous time
+  useEffect(() => {
+    const currentTime = new Date();
+    const previousTime = new Date(quire?.pTime); // Example previous time
 
-   // Calculate the difference in milliseconds
-   const differenceMs = Math.abs(currentTime - previousTime);
+    // Calculate the difference in milliseconds
+    const differenceMs = Math.abs(currentTime - previousTime);
 
-   // Convert difference to minutes, hours, and days
-   let differenceMinutes = Math.floor(differenceMs / (1000 * 60));
-   let differenceHours = Math.floor(differenceMinutes / 60);
-   let differenceDays = Math.floor(differenceHours / 24);
-   let differenceMonth = Math.floor(differenceDays / 30);
+    // Convert difference to minutes, hours, and days
+    let differenceMinutes = Math.floor(differenceMs / (1000 * 60));
+    let differenceHours = Math.floor(differenceMinutes / 60);
+    let differenceDays = Math.floor(differenceHours / 24);
+    let differenceMonth = Math.floor(differenceDays / 30);
 
-   // Handle crossing 60 minutes to hours
-   differenceMinutes %= 60;
+    // Handle crossing 60 minutes to hours
+    differenceMinutes %= 60;
 
-   // Set the time based on the largest non-zero unit
+    // Set the time based on the largest non-zero unit
     if (differenceMonth > 0) {
       setTime(`${differenceMonth} month`);
     } else if (differenceDays > 0) {
@@ -41,15 +42,12 @@ const HomeSection = ({ quire }) => {
     } else {
       setTime(`${differenceMinutes} minutes`);
     }
- }, [quire]);
+  }, [quire]);
 
-
- 
   return (
     <div className="border-b-[1px] border-slate-600 pb-2 mb-3">
-      {' '}
       <div className="  ">
-        <div className="hover:bg-slate-700 px-2 pt-2  hover:cursor-pointer  rounded-xl">
+        <div className="hover:bg-slate-700 px-2   hover:cursor-pointer  rounded-xl">
           <div className="flex items-end ">
             {comment && (
               <button
@@ -59,13 +57,60 @@ const HomeSection = ({ quire }) => {
                 <FaArrowAltCircleLeft />
               </button>
             )}
-            <img className="h-10 w-10 rounded-full" src={quire?.img} alt="" />
-            <div className="flex items-center">
-              <h1 className="ml-3 font-semibold text-indigo-300">{quire?.name} </h1>
-              <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
-                <GoDotFill className="text-green-600" />
-                {time} ago
-              </h2>
+            <div className="flex justify-between  w-full ">
+              <div className="flex items-end">
+                <img
+                  className="h-10 w-10 rounded-full"
+                  src={quire?.img}
+                  alt=""
+                />
+                <div className="flex items-center">
+                  <h1 className="ml-3 font-semibold text-indigo-300">
+                    {quire?.name}{' '}
+                  </h1>
+                  <h2 className="ml-5 text-xs text-slate-400 flex items-center gap-1">
+                    <GoDotFill className="text-green-600" />
+                    {time} ago
+                  </h2>
+                </div>
+              </div>
+              {/* remove modal */}
+              <div>
+                <label
+                  onClick={() => setMId(quire._id)}
+                  htmlFor="remove-modal"
+                  className="text-xl hover:cursor-pointer"
+                >
+                  ...
+                </label>
+
+                {/* Put this part before </body> tag */}
+                <input
+                  type="checkbox"
+                  id="remove-modal"
+                  className="modal-toggle"
+                />
+                <div className="modal" role="dialog">
+                  {/* <div className="modal-box"> */}
+                  <div className="bg-slate-800 p-5 rounded-xl w-28">
+                    <div className="flex justify-end -mt-5 -mr-5 ">
+                      <label
+                        htmlFor="remove-modal"
+                        className="bg-slate-600 px-2 rounded-full cursor-pointer"
+                      >
+                        x
+                      </label>
+                    </div>
+
+                    <button
+                      onClick={ handleRemove}
+                      className="btn btn-xs btn-secondary"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
