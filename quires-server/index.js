@@ -120,6 +120,13 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    // Delete one comment Remove
+    app.delete('/commentRemove/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await commentCollection.deleteOne(query);
+      res.send(result);
+    });
 
     // // get doctor by id
     // app.get('/doctor/:id', async (req, res) => {
