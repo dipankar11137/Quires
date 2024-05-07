@@ -89,6 +89,13 @@ async function run() {
       const users = await cursor.toArray();
       res.send(users);
     });
+    // Delete one quires
+    app.delete('/quire/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await quiresCollection.deleteOne(query);
+      res.send(result);
+    });
 
     // // //  *********  post comment  ********//
 
