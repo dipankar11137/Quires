@@ -15,7 +15,7 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
   const [comments, setComments] = useState([]);
   const [rId,setRId]=useState('')
 
-  console.log(users)
+  // console.log(users)
   useEffect(() => {
     fetch(`http://localhost:5000/comment/${quire?._id}`)
       .then(res => res.json())

@@ -60,13 +60,69 @@ const LeftSide = () => {
               onClick={() => setButton('button2')}
               className={`${
                 button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
-              } w-[180px] p-2 rounded-lg cursor-pointer`}
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
                 <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+          
           </div>
         )}
       </div>

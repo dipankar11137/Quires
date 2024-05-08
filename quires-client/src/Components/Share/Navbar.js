@@ -94,6 +94,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex lg:pr-36 ml-40">
+        <div className="ml-12">
+          <input placeholder="Search  Queries                                             " className="bg-slate-700 w-[500px] pl-3 p-[5px] rounded-lg text-slate-100" type="text" name="" id="" />
+        </div>
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       {/* Image */}

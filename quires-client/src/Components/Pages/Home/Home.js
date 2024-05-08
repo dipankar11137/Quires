@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import AddPost from './AddPost/AddPost';
 import HomeSections from './Home Section/HomeSections';
 import LeftSide from './Home Section/LeftSide/LeftSide';
+import RightSide from './Home Section/RightSide/RightSide';
 
 const Home = () => {
  
@@ -26,9 +27,9 @@ const Home = () => {
           <AddPost/>
           <HomeSections />
         </div>
-        <div className="col-span-3 border-l-[1px] border-slate-500">
-          <div className="fixed mt-5 ml-5">
-            <h1>Dadona</h1>
+        <div className="col-span-3  border-slate-500">
+          <div className="fixed mt-5 mx-5">
+          <RightSide/>
           </div>
         </div>
       </div>
