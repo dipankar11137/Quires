@@ -111,7 +111,7 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
                   <input
                     type="checkbox"
                     id="remove-modal"
-                    className="modal-toggle"
+                    className="modal-toggle "
                   />
                   <div className="modal" role="dialog">
                     {/* <div className="modal-box"> */}
@@ -140,7 +140,7 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
 
           <div className="mt-3 font-normal  text-lg">
             {quire?.image && (
-              <img className="w-full h-[300px]" src={quire?.image} alt="" />
+              <img className="w-full h-[350px] mb-2" src={quire?.image} alt="" />
             )}
 
             <h1>{quire?.description}</h1>

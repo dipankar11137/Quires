@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import AddPost from './AddPost/AddPost';
 import HomeSections from './Home Section/HomeSections';
+import LeftSide from './Home Section/LeftSide/LeftSide';
 
 const Home = () => {
  
@@ -15,13 +16,13 @@ const Home = () => {
   return (
     <div className="pt-[66px] text-white">
       <div className="grid grid-cols-12">
-        <div className="col-span-3 border-r-[1px] border-slate-500 ">
+        <div className="col-span-2 border-r-[1px] border-slate-500 ">
           <div className="fixed mt-5 ml-5">
-            <h1>Dado</h1>
+           <LeftSide/>
          
           </div>
         </div>
-        <div className="col-span-6">
+        <div className="col-span-7">
           <AddPost/>
           <HomeSections />
         </div>
