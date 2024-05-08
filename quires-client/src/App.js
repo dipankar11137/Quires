@@ -7,6 +7,7 @@ import CreateAccount from "./Components/Login/CreateAccount";
 import Login from "./Components/Login/Login";
 import Home from "./Components/Pages/Home/Home";
 import HomeSection from "./Components/Pages/Home/Home Section/HomeSection";
+import Quiz from "./Components/Pages/Quiz/Quiz";
 import Navbar from "./Components/Share/Navbar";
 import NotFound from "./Components/Share/NotFound";
 
@@ -30,7 +31,7 @@ function App() {
     <div>
       {/* <CreateAccount /> */}
       <div
-        className={`fixed  bg-white w-full shadow-md ${
+        className={`fixed  bg-white w-full shadow-md top-0 ${
           isScrolled ? ' fixed top-0 z-50 duration-1000' : ''
         }`}
       >
@@ -39,19 +40,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        {/* <Route path="/home" element={<Home1 />}></Route> */}
+        <Route path="/quiz" element={<Quiz />}></Route>
         <Route path="/createAccount" element={<CreateAccount />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
 
-        <Route
-          path="/dashboard"
-          element={
-          
-              <Home />
-          
-          }
-        >
+        <Route path="/dashboard" element={<Home />}>
           <Route index element={<HomeSection />} />
           {/* <Route path="bookings" element={<Bookings />} />
           <Route path="addDoctor" element={<AddDoctor />} />

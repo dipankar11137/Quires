@@ -113,7 +113,10 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <div className="dropdown dropdown-end  mr-5">
-            <ul>
+            <ul className="flex gap-5 items-center">
+              <li className="font-bold text-orange-500 hover:text-orange-400">
+                <Link to="/quiz">Quiz</Link>
+              </li>
               <li className=" ">
                 <button className="  text-amber-500" onClick={logout}>
                   Sign Out
