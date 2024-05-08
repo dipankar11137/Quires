@@ -59,7 +59,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="  navbar bg-gray-900   text-white border-b-[1px] border-slate-500">
+    <div className="  navbar bg-gray-900   text-white border-b-[1px] border-slate-700">
       <div className="navbar-start ">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -87,21 +87,30 @@ const Navbar = () => {
         </div>
         <Link
           to="/"
-          className="btn btn-ghost normal-case font-bold lg:text-3xl  sm:text-sm text-amber-500"
+          className="btn btn-ghost normal-case font-bold lg:text-3xl  sm:text-sm text-amber-500 ml-5"
         >
-          <img className="h-12 mr-2" src="" alt="" />
-          Logo/name
+          <img
+            className="h-12 mr-2 rounded-full"
+            src="https://seeklogo.com/images/E/education-book-sun-logo-B0AC2622BD-seeklogo.com.png"
+            alt=""
+          />
+          Knowledge Café
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex lg:pr-36 ml-40">
         <div className="ml-12">
-          <input placeholder="Search  Queries                                             " className="bg-slate-700 w-[500px] pl-3 p-[5px] rounded-lg text-slate-100" type="text" name="" id="" />
+          <input
+            placeholder="Search  Queries                                             "
+            className="bg-slate-700 w-[500px] pl-3 p-[5px] rounded-lg text-slate-100"
+            type="text"
+            name=""
+            id=""
+          />
         </div>
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       {/* Image */}
       <div className="navbar-end">
-       
         {user ? (
           <div className="dropdown dropdown-end  mr-5">
             <ul>

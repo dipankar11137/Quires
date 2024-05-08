@@ -6,7 +6,8 @@ import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const LeftSide = () => {
   const [button, setButton] = useState('')
-  const [tropics,setTropics]=useState(false)
+  const [tropics, setTropics] = useState(false)
+    const [resources, setResources] = useState(false);
   return (
     <div className="text-slate-300">
       <div>
@@ -122,7 +123,96 @@ const LeftSide = () => {
                 Popular
               </button>
             </div>
-          
+          </div>
+        )}
+        <div className="w-[180px] h-[1px] bg-slate-800 my-2"></div>
+        <div className="pb-2 text-slate-500">
+          {resources ? (
+            <button
+              onClick={() => setResources(false)}
+              className="flex justify-between items-center w-[180px] hover:bg-slate-800 p-2 rounded-lg"
+            >
+              Resources
+              <IoIosArrowUp className="text-slate-100" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setResources(true)}
+              className="flex justify-between items-center w-[180px] hover:bg-slate-800 p-2 rounded-lg"
+            >
+              Resources
+              <IoIosArrowDown className="text-slate-100" />
+            </button>
+          )}
+        </div>
+        {resources && (
+          <div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
+            <div
+              onClick={() => setButton('button2')}
+              className={`${
+                button === 'button2' ? 'bg-slate-800' : 'hover:bg-slate-800 '
+              } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
+            >
+              <button className="flex gap-2 items-center  pl-2 ">
+                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                Popular
+              </button>
+            </div>
           </div>
         )}
       </div>

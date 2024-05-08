@@ -5,7 +5,7 @@ const RightSide = () => {
     <div>
       <div>
         <img
-          className="w-full"
+          className="w-full "
           src="https://fotofirstphotobook.co.za/wp-content/uploads/2023/11/POSTER-6-black-Friday-2023-01-01.jpg"
           alt=""
         />

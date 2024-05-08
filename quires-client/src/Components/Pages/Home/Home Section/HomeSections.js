@@ -4,6 +4,7 @@ import HomeSection from './HomeSection';
 
 const HomeSections = () => {
   const [quires, setQuires] = useState([])
+
   const [id, setMId] = useState('')
   console.log(id)
   useEffect(() => {
