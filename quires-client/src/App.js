@@ -44,7 +44,14 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home searchGet={searchGet} />}></Route>
-        <Route path="/quiz" element={<Quiz />}></Route>
+        <Route
+          path="/quiz"
+          element={
+            <RequireAuth>
+              <Quiz />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="/createAccount" element={<CreateAccount />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
