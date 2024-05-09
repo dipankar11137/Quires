@@ -5,8 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import CreateAccount from "./Components/Login/CreateAccount";
 import Login from "./Components/Login/Login";
+import Dashboard from "./Components/Pages/Dashboard/Dashboard";
+import ShowAllQueries from "./Components/Pages/Dashboard/ShowAllQueries/ShowAllQueries";
 import Home from "./Components/Pages/Home/Home";
-import HomeSection from "./Components/Pages/Home/Home Section/HomeSection";
 import Quiz from "./Components/Pages/Quiz/Quiz";
 import Navbar from "./Components/Share/Navbar";
 import NotFound from "./Components/Share/NotFound";
@@ -45,8 +46,8 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
 
-        <Route path="/dashboard" element={<Home />}>
-          <Route index element={<HomeSection />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index element={<ShowAllQueries />} />
           {/* <Route path="bookings" element={<Bookings />} />
           <Route path="addDoctor" element={<AddDoctor />} />
           <Route path="manageDoctor" element={<ManageDoctors />} />
