@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import ShowAllQuerie from './ShowAllQuerie';
 
 const ShowAllQueries = () => {
@@ -8,7 +9,22 @@ const ShowAllQueries = () => {
     fetch('http://localhost:5000/quires')
       .then(res => res.json())
       .then(data => setPost(data));
-  },[posts])
+  }, [posts])
+    const handleDelete = id => {
+      const proceed = window.confirm('Are You Sure ?');
+      if (proceed) {
+        const url = `http://localhost:5000/quire/${id}`;
+        fetch(url, {
+          method: 'DELETE',
+        })
+          .then(res => res.json())
+          .then(data => {
+            const remaining = posts.filter(product => product._id !== id);
+            setPost(remaining);
+            toast.success('Successfully Delete');
+          });
+      }
+    };
   return (
     <div className="w-[320px] md:w-[1000px] lg:w-[1200px] pb-20">
       {/* show */}
@@ -38,7 +54,7 @@ const ShowAllQueries = () => {
               key={post._id}
               post={post}
               index={index + 1}
-              // handleDelete={handleDelete}
+              handleDelete={handleDelete}
             />
           ))}
       </div>

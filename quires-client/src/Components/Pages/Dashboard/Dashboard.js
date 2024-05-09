@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { FaUserMd, FaUserPlus } from 'react-icons/fa';
 
 import { MdDashboard } from 'react-icons/md';
 import { Link, Outlet, useLocation } from 'react-router-dom';
@@ -62,7 +61,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-col gap-4 relative">
+                <div className="mt-10 flex flex-col gap-4 relative ">
                   {/* Dashboard */}
                   <div
                     onClick={() => setSelectedButton('Button 10')}
@@ -90,75 +89,12 @@ const Dashboard = () => {
                           !open && 'opacity-0 translate-x-28 overflow-hidden '
                         }`}
                       >
-                        Manage Booking
+                       All Queries
                       </h2>
                     </Link>
                   </div>
 
-                  {/* add doctor */}
-                  <div
-                    onClick={() => setSelectedButton('Button 5')}
-                    className={
-                      selectedButton === 'Button 5'
-                        ? 'bg-white text-black w-[215px] rounded-lg'
-                        : ''
-                    }
-                  >
-                    {' '}
-                    <Link
-                      to="/dashboard/addDoctor"
-                      className={`  group flex items-center text-xl w-[215px] gap-3.5 font-medium p-2  hover:bg-warning rounded-md`}
-                    >
-                      <div>
-                        {React.createElement(FaUserPlus, {
-                          size: '24',
-                        })}
-                      </div>
-                      <h2
-                        style={{
-                          transitionDelay: `${0 + 3}00ms`,
-                        }}
-                        className={`whitespace-pre duration-500 ${
-                          !open && 'opacity-0 translate-x-28 overflow-hidden '
-                        }`}
-                      >
-                        Add Doctor
-                      </h2>
-                    </Link>
-                  </div>
-
-                  {/* Manage Porduct */}
-                  <div
-                    onClick={() => setSelectedButton('Button 6')}
-                    className={
-                      selectedButton === 'Button 6'
-                        ? 'bg-white w-[215px] text-black rounded-lg '
-                        : ''
-                    }
-                  >
-                    {' '}
-                    <Link
-                      to="/dashboard/manageDoctor"
-                      className={`  group flex items-center text-xl w-[215px]  gap-3.5 font-medium p-2 hover:bg-warning rounded-md`}
-                    >
-                      <div>
-                        {React.createElement(FaUserMd, {
-                          size: '20',
-                        })}
-                      </div>
-                      <h2
-                        style={{
-                          transitionDelay: `${0 + 3}00ms`,
-                        }}
-                        className={`whitespace-pre duration-500 ${
-                          !open &&
-                          'opacity-0 translate-x-28 overflow-hidden w-[215px]'
-                        }`}
-                      >
-                        Manage Doctor
-                      </h2>
-                    </Link>
-                  </div>
+                  
                 </div>
               </div>
             </section>
