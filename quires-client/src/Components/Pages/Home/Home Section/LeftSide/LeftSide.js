@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BsArrowUpRightCircleFill } from 'react-icons/bs';
+import { FaBookAtlas, FaSwatchbook } from 'react-icons/fa6';
 import { GoHome } from 'react-icons/go';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
@@ -64,7 +65,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaBookAtlas className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -75,7 +76,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaBookAtlas className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -86,7 +87,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaBookAtlas className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -97,7 +98,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaBookAtlas className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -108,7 +109,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaBookAtlas className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -119,7 +120,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaBookAtlas className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -154,7 +155,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaSwatchbook className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -165,7 +166,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaSwatchbook className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -176,7 +177,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaSwatchbook className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -187,7 +188,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaSwatchbook className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -198,7 +199,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaSwatchbook className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>
@@ -209,7 +210,7 @@ const LeftSide = () => {
               } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
             >
               <button className="flex gap-2 items-center  pl-2 ">
-                <BsArrowUpRightCircleFill className="text-xl text-slate-100" />
+                <FaSwatchbook className="text-xl text-slate-100" />
                 Popular
               </button>
             </div>

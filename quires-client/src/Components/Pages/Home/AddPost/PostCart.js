@@ -16,8 +16,6 @@ const PostCart = ({user}) => {
 
   // Format the current time
   const formattedTime = `${year}-${month}-${date}T${hours}:${minutes}:${seconds}`;
- 
-
 
   // 
    const {
@@ -70,7 +68,7 @@ const PostCart = ({user}) => {
          pTime: formattedTime,
        };
 
-       console.log('nai',updateUrl);
+      //  console.log('nai',updateUrl);
        fetch(`http://localhost:5000/quires`, {
          method: 'POST',
          headers: {
@@ -84,9 +82,6 @@ const PostCart = ({user}) => {
          });
 }
 
-   
-
-
   }
   return (
     <div className="modal-box">
@@ -99,7 +94,7 @@ const PostCart = ({user}) => {
         </label>
       </div>
       <div>
-        <h1 className="text-center -mt-5 font-semibold border-b-[1px] pb-2 border-slate-600">
+        <h1 className="text-center -mt-3 font-semibold border-b-[1px] pb-2 border-slate-600">
           Create Post
         </h1>
       </div>

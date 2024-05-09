@@ -69,9 +69,9 @@ const image = img[0];
   };
 
   const onSubmit =async (data) => {
-    console.log(data.email, data.password, data.name);
+    // console.log(data.email, data.password, data.name);
     await createUserWithEmailAndPassword(data.email, data.password);
-    await signInWithEmailAndPassword(data.email, data.password);
+    // await signInWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
      createDBUser(data.name, data.email,data.img);
     // toast.success("Updated profile");

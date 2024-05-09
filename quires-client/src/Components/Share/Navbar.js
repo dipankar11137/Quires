@@ -4,60 +4,47 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
-const Navbar = () => {
+const Navbar = ({ setSearchGet }) => {
   const [user] = useAuthState(auth);
   const email = user?.email;
   const navigate = useNavigate();
   const [booking, setBooking] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+
   const logout = () => {
     signOut(auth);
   };
 
   useEffect(() => {
     fetch(`https://boxberry.onrender.com/carBooking/${email}`)
-      .then((res) => res.json())
-      .then((data) => setBooking(data));
-  }, [booking]);
+      .then(res => res.json())
+      .then(data => setBooking(data));
+  }, [booking, email]);
 
-  const handleBook = () => {
-    navigate("/myOrders");
+  const [quires, setQuires] = useState([]);
+
+  const [id, setMId] = useState('');
+  // console.log(id)
+  useEffect(() => {
+    fetch('http://localhost:5000/quires')
+      .then(res => res.json())
+      .then(data => setQuires(data));
+  }, [quires]);
+
+  const handleSearch = e => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    // Filter cards based on search query
+    const filtered = quires.filter(car => {
+      // Check if the car has a 'name' property before using toLowerCase()
+      return car.description && car.description.toLowerCase().includes(query.toLowerCase());
+    });
+
+    setSearchGet(filtered);
   };
 
-  const menuItems = (
-    <>
-      {/* <li className="font-bold hover:text-orange-400  text-xl">
-        <Link to="/">
-          <FaHome />
-        </Link>
-      </li> */}
-      {/* <li className="font-bold hover:text-orange-400">
-        <Link to="/blogs">Blogs</Link>
-      </li> */}
-      {/* {user && (
-        <li className="font-bold hover:text-orange-400">
-          <Link to="/myOrders">My Orders</Link>
-        </li>
-      )} */}
-      {/* <li className="font-bold hover:text-orange-400">
-        <Link to="/showAllReview">Reviews</Link>
-      </li> */}
-
-      {/* {user && (
-        <li className="font-bold hover:text-orange-400">
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-      )} */}
-      {/* <li className=" font-bold">
-        {user ? (
-          <button className=" font-bold" onClick={logout}>
-            Sign Out
-          </button>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-      </li> */}
-    </>
-  );
+  const menuItems = <></>;
   return (
     <div className="  navbar bg-gray-900   text-white border-b-[1px] border-slate-700">
       <div className="navbar-start ">
@@ -98,15 +85,20 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex lg:pr-36 ml-40">
-        <div className="ml-12">
-          <input
-            placeholder="Search  Queries                                             "
-            className="bg-slate-700 w-[500px] pl-3 p-[5px] rounded-lg text-slate-100"
-            type="text"
-            name=""
-            id=""
-          />
-        </div>
+        {user && (
+          <div className="ml-12">
+            <input
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="🔍 Search Queries"
+              className="bg-slate-700 w-[500px] pl-3 p-[5px] rounded-lg text-slate-100"
+              type="text"
+              name=""
+              id=""
+            />
+          </div>
+        )}
+
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
       </div>
       {/* Image */}
@@ -114,12 +106,17 @@ const Navbar = () => {
         {user ? (
           <div className="dropdown dropdown-end  mr-5">
             <ul className="flex gap-5 items-center">
-              <li className="font-bold text-slate-400 hover:text-orange-400">
-                <Link to="/quiz">Quiz</Link>
-              </li>
-              <li className="font-bold text-slate-400 hover:text-orange-400">
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
+              {user && (
+                <li className="font-bold text-slate-400 hover:text-orange-400">
+                  <Link to="/quiz">Quiz</Link>
+                </li>
+              )}
+              {user?.email === 'nahid@gmail.com' && (
+                <li className="font-bold text-slate-400 hover:text-orange-400">
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+              )}
+
               <li className=" ">
                 <button className="  text-amber-500" onClick={logout}>
                   Sign Out

@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import CreateAccount from "./Components/Login/CreateAccount";
 import Login from "./Components/Login/Login";
+import RequireAuth from "./Components/Login/RequireAUth";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import ShowAllQueries from "./Components/Pages/Dashboard/ShowAllQueries/ShowAllQueries";
 import Home from "./Components/Pages/Home/Home";
@@ -13,7 +14,9 @@ import Navbar from "./Components/Share/Navbar";
 import NotFound from "./Components/Share/NotFound";
 
 function App() {
-     const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [inputText, setInputText] = useState('');
+   const [searchGet, setSearchGet] = useState([]);
 
      useEffect(() => {
        const handleScroll = () => {
@@ -36,17 +39,24 @@ function App() {
           isScrolled ? ' fixed top-0 z-50 duration-1000' : ''
         }`}
       >
-        <Navbar />
+        <Navbar setSearchGet={setSearchGet} />
       </div>
 
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home searchGet={searchGet} />}></Route>
         <Route path="/quiz" element={<Quiz />}></Route>
         <Route path="/createAccount" element={<CreateAccount />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
 
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
           <Route index element={<ShowAllQueries />} />
           {/* <Route path="bookings" element={<Bookings />} />
           <Route path="addDoctor" element={<AddDoctor />} />
