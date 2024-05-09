@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { FaArrowAltCircleLeft, FaCommentAlt, FaShare } from 'react-icons/fa';
 import { GoDotFill } from 'react-icons/go';
+import { WhatsappShareButton } from 'react-share';
 import { toast } from 'react-toastify';
 import auth from '../../../../firebase.init';
 import Comments from './Comments/Comments';
@@ -13,7 +14,9 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
   const [remove, setRemove] = useState(false);
   const [time, setTime] = useState(0);
   const [comments, setComments] = useState([]);
-  const [rId,setRId]=useState('')
+  const [rId, setRId] = useState('')
+  const url = 'http://localhost:3000/';
+  const title='hello'
 
   // console.log(users)
   useEffect(() => {
@@ -66,10 +69,11 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
     }
   }, [quire]);
 
+
   return (
     <div className="border-b-[1px] border-slate-600 pb-2 mb-3">
       <div className="  ">
-        <div className="hover:bg-slate-700 px-2   hover:cursor-pointer  rounded-xl">
+        <div className="hover:bg-slate-800 px-2   hover:cursor-pointer  rounded-xl">
           <div className="flex items-end ">
             {comment && (
               <button
@@ -140,7 +144,11 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
 
           <div className="mt-3 font-normal  text-lg">
             {quire?.image && (
-              <img className="w-full h-[350px] mb-2" src={quire?.image} alt="" />
+              <img
+                className="w-full h-[350px] mb-2"
+                src={quire?.image}
+                alt=""
+              />
             )}
 
             <h1>{quire?.description}</h1>
@@ -153,9 +161,11 @@ const HomeSection = ({ quire, handleRemove, setMId }) => {
             >
               <FaCommentAlt /> {comments.length}
             </button>
-            <button className="ml-2 bg-slate-800 hover:bg-slate-900 px-3 py-1 rounded-full flex items-center gap-2">
-              <FaShare /> Share
-            </button>
+            <WhatsappShareButton url={url} title={title}>
+              <button className="ml-2 bg-slate-800 hover:bg-slate-900 px-3 py-1 rounded-full flex items-center gap-2">
+                <FaShare /> Share
+              </button>
+            </WhatsappShareButton>
           </div>
         </div>
 
