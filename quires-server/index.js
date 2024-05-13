@@ -27,7 +27,9 @@ async function run() {
     const quiresCollection = client.db('queries').collection('quires');
 
     const commentCollection = client.db('queries').collection('comments');
-    const contactCollection = client.db('hospital').collection('contacts');
+    const quizSolutionCollection = client
+      .db('queries')
+      .collection('quizSolution');
 
     // // // // // // // // // // // //
 
@@ -100,6 +102,7 @@ async function run() {
       const result = await commentCollection.insertOne(appointmentsBook);
       res.send(result);
     });
+
     // get comments
     app.get('/comments', async (req, res) => {
       const query = {};
@@ -123,7 +126,12 @@ async function run() {
       res.send(result);
     });
 
-    
+    // Post solve
+    app.post('/solve', async (req, res) => {
+      const appointmentsBook = req.body;
+      const result = await quizSolutionCollection.insertOne(appointmentsBook);
+      res.send(result);
+    });
   } finally {
   }
 }
