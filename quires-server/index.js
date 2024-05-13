@@ -132,6 +132,20 @@ async function run() {
       const result = await quizSolutionCollection.insertOne(appointmentsBook);
       res.send(result);
     });
+    // get comments
+    app.get('/solve', async (req, res) => {
+      const query = {};
+      const cursor = quizSolutionCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
+    // app.get('/comment/:pId', async (req, res) => {
+    //   const pId = req.params.pId;
+    //   const query = { pId };
+    //   const cursor = commentCollection.find(query);
+    //   const result = await cursor.toArray();
+    //   res.send(result);
+    // });
   } finally {
   }
 }
