@@ -1,16 +1,18 @@
+
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import useUser from '../../hooks/useUser';
 import './Quiz.css';
 
-const Quiz = () => {
+const QUiz2 = () => {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  const { user } = useUser();
-  const currentDateAndTime = new Date();
-const currentDate = currentDateAndTime.toDateString(); 
-const currentTime = currentDateAndTime.toLocaleTimeString();
+  const { user } = useUser()
+    const currentDateAndTime = new Date();
+    const currentDate = currentDateAndTime.toDateString();
+    const currentTime = currentDateAndTime.toLocaleTimeString();
+
   const questions = [
     {
       text: 'What is the capital of America?',
@@ -91,36 +93,37 @@ const currentTime = currentDateAndTime.toLocaleTimeString();
     setShowResults(false);
   };
 
-    const handleSUbmit = () => {
-      const updateData = {
-        correctAnswer: score,
-        questions: questions.length,
-        percent: parseInt((score / questions.length) * 100),
-        name: user?.name,
-        email: user?.email,
-        img: user?.img,
-        date: currentDate,
-        time:currentTime
-      };
+  const handleSUbmit = () => {
 
-      fetch(`http://localhost:5000/solve`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(updateData),
-      })
-        .then(res => res.json())
-        .then(data => {
-                toast.success('Submit Successfully ');
-          restartGame();
-        });
+    const updateData = {
+      correctAnswer: score,
+      questions: questions.length,
+      percent: parseInt((score / questions.length) * 100),
+      name: user?.name,
+      email: user?.email,
+      img: user?.img,
+      date: currentDate,
+      time: currentTime,
     };
+
+    fetch(`http://localhost:5000/solve`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then(res => res.json())
+      .then(data => {
+              toast.success('Submit Successfully ');
+       restartGame();
+      });
+  }
   return (
     <div className="quiz pt-10">
       {/* 1. Header  */}
       <div className="mb-3 text-3xl">
-        <h1> Quiz With Us</h1>
+        <h1> Quiz With Us 2</h1>
 
         {/* 2. Current Score  */}
         <h2>Score: {score}</h2>
@@ -135,17 +138,12 @@ const currentTime = currentDateAndTime.toLocaleTimeString();
             {score} out of {questions.length} correct - (
             {parseInt((score / questions.length) * 100)}%)
           </h2>
-          <div>
+          <div >
             <button className="button1 mt-4" onClick={() => restartGame()}>
               Restart Quiz
             </button>
 
-            <button
-              onClick={handleSUbmit}
-              className="ml-8 btn  btn-secondary font-bold"
-            >
-              Submit
-            </button>
+            <button onClick={handleSUbmit} className='ml-8 btn  btn-secondary font-bold'>Submit</button>
           </div>
         </div>
       ) : (
@@ -177,4 +175,4 @@ const currentTime = currentDateAndTime.toLocaleTimeString();
   );
 };
 
-export default Quiz;
+export default QUiz2;

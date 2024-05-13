@@ -11,12 +11,16 @@ const Home = ({ searchGet }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  const handleHome = () => {
+      window.scrollTo(0, 0);
+  }
   return (
     <div className="pt-[66px] text-white">
       <div className="grid grid-cols-12">
         <div className="col-span-2 border-r-[1px] border-slate-700 ">
           <div className="fixed mt-5 ml-5">
-            <LeftSide />
+            <LeftSide handleHome={handleHome} />
           </div>
         </div>
         <div className="col-span-7">

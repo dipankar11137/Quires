@@ -5,10 +5,11 @@ import { GoHome } from 'react-icons/go';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 
-const LeftSide = () => {
-  const [button, setButton] = useState('')
-  const [tropics, setTropics] = useState(false)
-    const [resources, setResources] = useState(false);
+const LeftSide = ({ handleHome }) => {
+  const [button, setButton] = useState('');
+  const [tropics, setTropics] = useState(false);
+  const [resources, setResources] = useState(false);
+
   return (
     <div className="text-slate-300">
       <div>
@@ -19,7 +20,10 @@ const LeftSide = () => {
               button === 'button1' ? 'bg-slate-800' : 'hover:bg-slate-800 '
             } w-[180px] p-2 rounded-lg cursor-pointer mb-2`}
           >
-            <button className="flex gap-2 items-center  pl-2 ">
+            <button
+              onClick={handleHome}
+              className="flex gap-2 items-center  pl-2 "
+            >
               <GoHome className="text-xl text-slate-100" />
               Home
             </button>
