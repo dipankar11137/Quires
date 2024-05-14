@@ -103,6 +103,7 @@ const Quiz3 = () => {
         img: user?.img,
         date: currentDate,
         time: currentTime,
+        quiz: 'Quiz 3',
       };
 
       fetch(`http://localhost:5000/solve`, {

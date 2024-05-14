@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 import useUser from '../../../../hooks/useUser';
 import Comment from './Comment';
 
 const Comments = ({ quire, comments, setRId, handleCommentRemove }) => {
   const [comment, setComment] = useState('');
-  const {user}=useUser()
+  const { user } = useUser()
+  const navigator=useNavigate()
 
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -40,6 +42,10 @@ const Comments = ({ quire, comments, setRId, handleCommentRemove }) => {
         setComment('');
       });
   };
+
+  const handleChange = () => {
+    navigator('/login')
+  }
   return (
     <div className="pb-1 mt-3 ml-3">
       {/* show comment */}
@@ -68,15 +74,29 @@ const Comments = ({ quire, comments, setRId, handleCommentRemove }) => {
 
       {/* add comment */}
       <div className="  flex mt-3">
-        <textarea
-          value={comment}
-          onChange={e => setComment(e.target.value)}
-          placeholder="Write your answer"
-          className="w-full pl-2 pt-1 bg-slate-800 rounded-l-lg"
-          type="text"
-          name=""
-          id=""
-        />
+        {user ? (
+          <textarea
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+            placeholder="Write your answer"
+            className="w-full pl-2 pt-1 bg-slate-800 rounded-l-lg"
+            type="text"
+            name=""
+            id=""
+          />
+        ) : (
+         
+            <textarea
+              value={comment}
+              onChange={handleChange}
+              placeholder="Write your answer"
+              className="w-full pl-2 pt-1 bg-slate-800 rounded-l-lg"
+              type="text"
+              name=""
+              id=""
+            />
+        
+        )}
 
         {comment ? (
           <button onClick={handlePost} className="bg-slate-800">

@@ -119,7 +119,7 @@ const Navbar = ({ setSearchGet }) => {
 
               <li className=" ">
                 <button className="  text-amber-500" onClick={logout}>
-                  Sign Out
+                  SignOut
                 </button>
               </li>
             </ul>

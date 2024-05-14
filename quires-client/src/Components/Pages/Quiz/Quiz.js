@@ -100,7 +100,8 @@ const currentTime = currentDateAndTime.toLocaleTimeString();
         email: user?.email,
         img: user?.img,
         date: currentDate,
-        time:currentTime
+        time: currentTime,
+        quiz:'Quiz 1'
       };
 
       fetch(`http://localhost:5000/solve`, {
