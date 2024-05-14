@@ -139,6 +139,13 @@ async function run() {
       const users = await cursor.toArray();
       res.send(users);
     });
+    // Delete one comment Remove
+    app.delete('/solveDelete/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await quizSolutionCollection.deleteOne(query);
+      res.send(result);
+    });
     // app.get('/comment/:pId', async (req, res) => {
     //   const pId = req.params.pId;
     //   const query = { pId };
