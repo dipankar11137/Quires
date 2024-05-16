@@ -30,6 +30,7 @@ async function run() {
     const quizSolutionCollection = client
       .db('queries')
       .collection('quizSolution');
+    const inquireCollection = client.db('queries').collection('inquire');
 
     // // // // // // // // // // // //
 
@@ -94,6 +95,27 @@ async function run() {
       res.send(result);
     });
 
+    // Post inquire
+    app.post('/inquire', async (req, res) => {
+      const appointmentsBook = req.body;
+      const result = await inquireCollection.insertOne(appointmentsBook);
+      res.send(result);
+    });
+    // get inquire
+    app.get('/inquire', async (req, res) => {
+      const query = {};
+      const cursor = inquireCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
+    // Delete one inquire
+    app.delete('/inquire/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await inquireCollection.deleteOne(query);
+      res.send(result);
+    });
+
     // // //  *********  post comment  ********//
 
     // Post appointments
@@ -146,13 +168,6 @@ async function run() {
       const result = await quizSolutionCollection.deleteOne(query);
       res.send(result);
     });
-    // app.get('/comment/:pId', async (req, res) => {
-    //   const pId = req.params.pId;
-    //   const query = { pId };
-    //   const cursor = commentCollection.find(query);
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // });
   } finally {
   }
 }
