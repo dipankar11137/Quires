@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import { FaChild } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import auth from '../../../firebase.init';
@@ -74,7 +75,7 @@ const Dashboard = () => {
                     {' '}
                     <Link
                       to="/dashboard"
-                      className={`  group flex items-center text-xl w-[215px] gap-3.5 font-medium p-2 hover:bg-warning rounded-md`}
+                      className={`  group flex items-center text-xl w-[215px] gap-3.5 font-medium p-2 hover:bg-slate-600 rounded-md`}
                     >
                       <div>
                         {React.createElement(MdDashboard, {
@@ -89,12 +90,41 @@ const Dashboard = () => {
                           !open && 'opacity-0 translate-x-28 overflow-hidden '
                         }`}
                       >
-                       All Queries
+                        All Queries
                       </h2>
                     </Link>
                   </div>
-
-                  
+                  {/* inquire */}
+                  <div
+                    onClick={() => setSelectedButton('Button 1')}
+                    className={
+                      selectedButton === 'Button 1'
+                        ? 'bg-slate-900 text-white w-[215px] rounded-lg'
+                        : ''
+                    }
+                  >
+                    {' '}
+                    <Link
+                      to="/dashboard/inquire"
+                      className={`  group flex items-center text-xl w-[215px] gap-3.5 font-medium p-2 hover:bg-slate-600 rounded-md`}
+                    >
+                      <div>
+                        {React.createElement(FaChild, {
+                          size: '20',
+                        })}
+                      </div>
+                      <h2
+                        style={{
+                          transitionDelay: `${0 + 3}00ms`,
+                        }}
+                        className={`whitespace-pre duration-500  ${
+                          !open && 'opacity-0 translate-x-28 overflow-hidden '
+                        }`}
+                      >
+                        Inquire
+                      </h2>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </section>

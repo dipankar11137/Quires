@@ -37,7 +37,7 @@ const InquireFrom = ({ setOpinion }) => {
             <textarea
               type="text"
               placeholder="Which type of quiz you want"
-              className="input input-bordered bg-white w-full max-w-xs pt-1 h-20"
+              className="input input-bordered  w-full max-w-xs pt-1 h-20"
               {...register('opinion', {
                 required: {
                   value: true,
@@ -57,7 +57,7 @@ const InquireFrom = ({ setOpinion }) => {
             <input
               type="text"
               placeholder="Your name"
-              className="input input-bordered bg-white w-full max-w-xs"
+              className="input input-bordered  w-full max-w-xs"
               {...register('name', {
                 required: {
                   value: true,
@@ -77,7 +77,7 @@ const InquireFrom = ({ setOpinion }) => {
             <input
               type="email"
               placeholder="Your Email"
-              className="input input-bordered bg-white w-full max-w-xs"
+              className="input input-bordered  w-full max-w-xs"
               {...register('email', {
                 required: {
                   value: true,
