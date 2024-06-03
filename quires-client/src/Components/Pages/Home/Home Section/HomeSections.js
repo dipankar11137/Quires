@@ -6,7 +6,7 @@ const HomeSections = ({ searchGet }) => {
   const [quires, setQuires] = useState([]);
 
   const [id, setMId] = useState('');
-  // console.log(id)
+
   useEffect(() => {
     fetch('http://localhost:5000/quires')
       .then(res => res.json())

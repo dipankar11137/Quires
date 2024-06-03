@@ -33,21 +33,23 @@ const Scores = () => {
      }
   }
   return (
-    <div className='pt-7'>
+    <div className="pt-7 pb-10">
       <div>
         <div>
-          <h1 className='mb-5 text-4xl text-center font-semibold uppercase text-green-400'>Ranking</h1>
+          <h1 className="mb-5 text-4xl text-center font-semibold uppercase text-green-400">
+            Ranking
+          </h1>
         </div>
-        <div className="overflow-x-auto mx-7 ">
+        <div className="overflow-x-auto mx-7 overflow-y-scroll h-[500px] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900">
           <table className="table table-xs text-center w-full">
             <thead>
               <tr className="border-[1px] border-slate-500">
                 <th></th>
                 <th>Name</th>
-                <th>date</th>
-                <th>time</th>
+                <th>Date</th>
+                <th>Time</th>
                 <th>Question</th>
-                <th>Hight Score</th>
+                <th>High Score</th>
                 <th>Percent</th>
                 {user?.email === 'nahid@gmail.com' && <th>Remove</th>}
               </tr>

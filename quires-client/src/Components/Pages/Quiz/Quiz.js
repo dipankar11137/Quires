@@ -9,8 +9,8 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const { user } = useUser();
   const currentDateAndTime = new Date();
-const currentDate = currentDateAndTime.toDateString(); 
-const currentTime = currentDateAndTime.toLocaleTimeString();
+  const currentDate = currentDateAndTime.toDateString();
+  const currentTime = currentDateAndTime.toLocaleTimeString();
   const questions = [
     {
       text: 'What is the capital of America?',
@@ -53,30 +53,16 @@ const currentTime = currentDateAndTime.toLocaleTimeString();
       options: [
         { id: 0, text: 'Canada', isCorrect: false },
         { id: 1, text: 'Russia', isCorrect: true },
-        { id: 2, text: 'Cuba', isCorrect: true },
-        { id: 3, text: 'Mexico', isCorrect: false },
-      ],
-    },
-    {
-      text: 'Which of the following countries DO NOT border the US?',
-      options: [
-        { id: 0, text: 'Canada', isCorrect: false },
-        { id: 1, text: 'Russia', isCorrect: true },
-        { id: 2, text: 'Cuba', isCorrect: true },
+        { id: 2, text: 'Cuba', isCorrect: false },
         { id: 3, text: 'Mexico', isCorrect: false },
       ],
     },
   ];
 
-  // Helper Functions
-
-  /* A possible answer was clicked */
   const optionClicked = isCorrect => {
-    // Increment the score
     if (isCorrect) {
       setScore(score + 1);
     }
-
     if (currentQuestion + 1 < questions.length) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -84,96 +70,127 @@ const currentTime = currentDateAndTime.toLocaleTimeString();
     }
   };
 
-  /* Resets the game back to default */
+  const handleNext = () => {
+    if (currentQuestion + 1 < questions.length) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setShowResults(true);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  const handlePageClick = index => {
+    setCurrentQuestion(index);
+  };
+
   const restartGame = () => {
     setScore(0);
     setCurrentQuestion(0);
     setShowResults(false);
   };
 
-    const handleSUbmit = () => {
-      const updateData = {
-        correctAnswer: score,
-        questions: questions.length,
-        percent: parseInt((score / questions.length) * 100),
-        name: user?.name,
-        email: user?.email,
-        img: user?.img,
-        date: currentDate,
-        time: currentTime,
-        quiz:'Quiz 1'
-      };
-
-      fetch(`http://localhost:5000/solve`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(updateData),
-      })
-        .then(res => res.json())
-        .then(data => {
-                toast.success('Submit Successfully ');
-          restartGame();
-        });
+  const handleSubmit = () => {
+    const updateData = {
+      correctAnswer: score,
+      questions: questions.length,
+      percent: parseInt((score / questions.length) * 100),
+      name: user?.name,
+      email: user?.email,
+      img: user?.img,
+      date: currentDate,
+      time: currentTime,
+      quiz: 'Quiz 1',
     };
-  return (
-    <div className="quiz pt-10">
-      {/* 1. Header  */}
-      <div className="mb-3 text-3xl">
-        <h1> Quiz With Us</h1>
+    // console.log(user)
 
-        {/* 2. Current Score  */}
-        <h2>Score: {score}</h2>
+    fetch(`http://localhost:5000/solve`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        toast.success('Submit Successfully');
+        restartGame();
+      });
+  };
+
+  return (
+    <div className="quiz pt-5">
+      <div className="mb-3 text-3xl">
+        <h1>Quiz With Us</h1>
+        {/* <h2>Score: {score}</h2> */}
       </div>
 
-      {/* 3. Show results or show the question game  */}
-      {showResults ? (
-        /* 4. Final Results */
-        <div className="final-results text-2xl bg-slate-700">
-          <h1>Final Results</h1>
-          <h2>
-            {score} out of {questions.length} correct - (
-            {parseInt((score / questions.length) * 100)}%)
-          </h2>
+      <div className="question-card">
+        <div className=" flex justify-between text-start mb-5">
           <div>
-            <button className="button1 mt-4" onClick={() => restartGame()}>
-              Restart Quiz
-            </button>
+            <h2>
+              Question: {currentQuestion + 1} out of {questions.length}
+            </h2>
+            <h3 className="question-text">{questions[currentQuestion].text}</h3>
+          </div>
+          <div className="pagination mt-4">
+            {questions.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handlePageClick(index)}
+                className={`page-number ${
+                  index === currentQuestion ? 'active' : 'hover:underline'
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        </div>
 
+        <ul className="ui1">
+          {questions[currentQuestion].options.map(option => (
+            <li
+              className="li1 cursor-pointer hover:bg-secondary hover:text-black font-bold"
+              key={option.id}
+              onClick={() => optionClicked(option.isCorrect)}
+            >
+              {option.text}
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={handlePrevious}
+            className="btn btn-accent"
+            disabled={currentQuestion === 0}
+          >
+            Previous
+          </button>
+
+          {currentQuestion + 1 === questions.length ? (
             <button
-              onClick={handleSUbmit}
-              className="ml-8 btn  btn-secondary font-bold"
+              onClick={handleSubmit}
+              className="ml-8 btn btn-secondary font-bold"
             >
               Submit
             </button>
-          </div>
+          ) : (
+            <button
+              onClick={handleNext}
+              className="btn btn-primary"
+              // disabled={currentQuestion + 1 === questions.length}
+            >
+              Next
+            </button>
+          )}
         </div>
-      ) : (
-        /* 5. Question Card  */
-        <div className="question-card">
-          {/* Current Question  */}
-          <h2>
-            Question: {currentQuestion + 1} out of {questions.length}
-          </h2>
-          <h3 className="question-text">{questions[currentQuestion].text}</h3>
-
-          {/* List of possible answers  */}
-          <ul className="ui1">
-            {questions[currentQuestion].options.map(option => {
-              return (
-                <li
-                  className="li1 cursor-pointer"
-                  key={option.id}
-                  onClick={() => optionClicked(option.isCorrect)}
-                >
-                  {option.text}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

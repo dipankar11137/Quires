@@ -69,3 +69,40 @@
   font-weight: bold;
   border-radius: 24px;
 }
+
+/* pagination */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-number {
+  background-color: #ac07c6;
+  border: none;
+  margin: 0 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.page-number.active {
+  background-color: #14f404;
+  color: rgb(26, 8, 8);
+  font-weight: 700;
+}
+
+.page-number:hover {
+  background-color: #80ff00;
+  color: rgb(17, 5, 5);
+}
+
+
+
+
+
+
+
+
+
